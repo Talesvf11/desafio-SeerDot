@@ -11,7 +11,8 @@ const toBRL = (n: number) =>
   });
 
 const Dashboard = () => {
-  const { metrics } = useData();
+  const data = useData();
+  const metrics = data.metrics.metrics;
 
   if (!metrics) {
     return (

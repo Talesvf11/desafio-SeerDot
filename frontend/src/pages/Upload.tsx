@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { useData } from "@/context/DataContext";
-const API_URL = import.meta.env.VITE_API_URL!;
+const API_URL = import.meta.env.VITE_API_URL;
 
 const Upload = () => {
   const [isDragOver, setIsDragOver] = useState(false);
