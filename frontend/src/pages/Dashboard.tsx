@@ -15,8 +15,6 @@ const Dashboard = () => {
   const data = useData();
   const metrics = data.metrics.metrics;
 
-  console.log(metrics);
-
   if (!metrics) {
     return (
       <div className="flex items-center justify-center h-[70vh] text-muted-foreground">
@@ -211,38 +209,46 @@ const Dashboard = () => {
         </Card>
 
         {/* Tabela top clientes*/}
-        <h1>Top 5 Clientes</h1>
-            <table className="min-w-full divide-y divide-gray-200">
-                <thead>
-                    <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Cliente
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Unidades Vendidas
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Faturamento Total
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {metrics.top_clients.map((client, index) => (
-                        <tr key={index} className="bg-white even:bg-gray-50">
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {client.Customer_ID}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {client.total_units_sold}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {/* Utilize uma função de formatação para exibir o valor em BRL */}
-                                {toBRL(client.total_revenue)}
-                            </td>
+        <Card className="border-analytics-primary/10">
+            <CardHeader>
+                <CardTitle className="text-foreground">
+                    Top 5 Clientes
+                </CardTitle>
+            </CardHeader>
+            <CardContent className="h-64">
+                <table className="min-w-full divide-y divide-gray-200">
+                    <thead>
+                        <tr>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Cliente
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Unidades Vendidas
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Faturamento Total
+                            </th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {metrics.top_clients.map((client, index) => (
+                            <tr key={index} className="bg-white even:bg-gray-50" >
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    {client.Customer_ID}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {client.total_units_sold}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {/* Utilize uma função de formatação para exibir o valor em BRL */}
+                                    {toBRL(client.total_revenue)}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+              </CardContent>
+            </Card>
       </section>
     </div>
   );
