@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useData } from "@/context/DataContext";
 import Chart from "react-apexcharts";
 
+
 const toBRL = (n: number) =>
   n.toLocaleString("pt-BR", {
     style: "currency",
@@ -13,6 +14,8 @@ const toBRL = (n: number) =>
 const Dashboard = () => {
   const data = useData();
   const metrics = data.metrics.metrics;
+
+  console.log(metrics);
 
   if (!metrics) {
     return (
@@ -110,6 +113,28 @@ const Dashboard = () => {
     theme: { mode: "light" as const },
   };
 
+  const regSeries = [
+    {
+      name: "Receita",
+      data: Object.values(metrics.revenue_by_region),
+    },
+  ];
+
+  const regOptions = {
+    chart: { type: "bar" as const },
+    colors: chartColors,
+    xaxis: { categories: Object.keys(metrics.revenue_by_region).sort() },
+    yaxis: {
+      labels: { formatter: (v: number) => toBRL(v) },
+    },
+    dataLabels: {
+      enabled: true,
+      formatter: (v: number) => toBRL(v),
+      style: { fontSize: "7.5px" },
+    },
+    theme: { mode: "light" as const },
+  };
+
   /* ---------- render ---------- */
   return (
     <div className="p-8 space-y-8">
@@ -170,6 +195,18 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent className="h-72">
             <Chart options={topOptions} series={topSeries} type="bar" height="100%" />
+          </CardContent>
+        </Card>
+
+        {/* Receita por região */}
+        <Card className="border-analytics-primary/10">
+          <CardHeader>
+            <CardTitle className="text-foreground">
+              Receita por região
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="h-64">
+            <Chart options={regOptions} series={regSeries} type="bar" height="100%" />
           </CardContent>
         </Card>
       </section>

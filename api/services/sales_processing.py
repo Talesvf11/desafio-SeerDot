@@ -67,5 +67,6 @@ def calculate_metrics(df: pd.DataFrame) -> dict[str, any]:
               .apply(float)
               .to_dict()
         ),
+        "revenue_by_region": df.groupby("Region")["Total_Amount"].sum().to_dict(),
     }
     return metrics
