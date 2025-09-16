@@ -28,7 +28,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -135,7 +135,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"          # pasta gerada pelo collectstatic
 STATICFILES_DIRS = [
-    BASE_DIR.parent / "frontend" / "dist",      # build do Vite
+    BASE_DIR / "frontend" / "dist",      # build do Vite
 ]
 
 # Default primary key field type

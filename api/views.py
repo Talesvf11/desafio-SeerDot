@@ -26,6 +26,7 @@ def upload_sales(request):
     try:
         df = load_csv_to_df(file)
         metrics = calculate_metrics(df)
+        print(metrics)
     except ValueError as exc:
         return Response({"error": str(exc)}, status=400)
     except Exception:
