@@ -209,6 +209,40 @@ const Dashboard = () => {
             <Chart options={regOptions} series={regSeries} type="bar" height="100%" />
           </CardContent>
         </Card>
+
+        {/* Tabela top clientes*/}
+        <h1>Top 5 Clientes</h1>
+            <table className="min-w-full divide-y divide-gray-200">
+                <thead>
+                    <tr>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Cliente
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Unidades Vendidas
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Faturamento Total
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {metrics.top_clients.map((client, index) => (
+                        <tr key={index} className="bg-white even:bg-gray-50">
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                {client.Customer_ID}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {client.total_units_sold}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {/* Utilize uma função de formatação para exibir o valor em BRL */}
+                                {toBRL(client.total_revenue)}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
       </section>
     </div>
   );

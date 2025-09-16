@@ -45,6 +45,8 @@ def load_csv_to_df(fh) -> pd.DataFrame:
     return df
 
 def calculate_metrics(df: pd.DataFrame) -> dict[str, any]:
+
+
     metrics = {
         "total_revenue": float(df["Total_Amount"].sum()),
         "orders": int(len(df)),
@@ -68,5 +70,16 @@ def calculate_metrics(df: pd.DataFrame) -> dict[str, any]:
               .to_dict()
         ),
         "revenue_by_region": df.groupby("Region")["Total_Amount"].sum().to_dict(),
+        "top_clients": (
+            df.groupby("Customer_ID")
+              .agg(
+                  total_units_sold=("Quantity", "sum"),
+                  total_revenue=("Total_Amount", "sum")
+              )
+              .sort_values(by="total_units_sold", ascending=False)
+              .head(5)
+              .reset_index()
+              .to_dict('records')
+        ),
     }
     return metrics

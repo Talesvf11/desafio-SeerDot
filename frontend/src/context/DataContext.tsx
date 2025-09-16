@@ -11,6 +11,12 @@ interface SalesData {
   Region: string;
 }
 
+export interface ClientMetric {
+  client_id: string;
+  total_units_sold: number;
+  total_revenue: number;
+}
+
 // Indicadores que a API devolve
 export interface Metrics {
     total_revenue: number;
@@ -21,6 +27,7 @@ export interface Metrics {
     revenue_by_month: Record<string, number>;
     top_products: Record<string, number>;
     revenue_by_region: Record<string, number>;
+    top_clients: ClientMetric[]
 }
 
 interface DataContextType {
